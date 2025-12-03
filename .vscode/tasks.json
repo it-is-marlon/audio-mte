@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Construir Audio MTE",
+            "command": "cl.exe",
+            "args": [
+                "/Zi", // Generar información de depuración
+                "/EHsc", // Manejo de excepciones estándar
+                "/nologo", // Ocultar banner de copyright
+                "/Fe:", // Flag para nombrar el ejecutable
+                "${fileDirname}\\main.exe", // Salida: main.exe en la misma carpeta
+                "${file}", // Entrada: main.cpp
+                "Ole32.lib", // <--- CRITICO: Enlace a COM (CoInitialize)
+                "User32.lib" // Enlace a funciones básicas de ventana
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        }
+    ]
+}
