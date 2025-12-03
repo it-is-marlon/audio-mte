@@ -4,36 +4,37 @@
 #include <mmdeviceapi.h>
 #include <audioclient.h>
 #include <vector>
+#include <iostream>
+
+// WasapiListener.h
+// Implementación concreta usando la API nativa de Windows (WASAPI) en modo Loopback.
 
 class WasapiListener : public IAudioListener
 {
 private:
-    // --- Propiedades Privadas (Estado Interno) ---
-    // Punteros COM de Windows (La parte "fea" queda oculta aquí)
+    // Punteros COM para interactuar con Windows
     IMMDeviceEnumerator *_pEnumerator = nullptr;
     IMMDevice *_pDevice = nullptr;
     IAudioClient *_pAudioClient = nullptr;
     IAudioCaptureClient *_pCaptureClient = nullptr;
     WAVEFORMATEX *_pWaveFormat = nullptr;
 
+    // Estado interno
     bool _initialized = false;
-    bool _isRecording = false;
+    bool _recording = false;
 
-    // Métodos auxiliares privados (Helpers)
+    // Métodos privados para limpieza interna
     void CleanUp();
 
 public:
-    // Constructor / Destructor
     WasapiListener();
-    ~WasapiListener();
+    ~WasapiListener(); // El destructor se encarga de liberar memoria COM
 
-    // --- Implementación del Contrato Público ---
     bool Initialize() override;
     void Start() override;
     void Stop() override;
     bool GetAudioData(std::vector<float> &outputBuffer) override;
 
-    // Getter para saber el formato (útil para quien reciba los datos)
-    int GetSampleRate() const;
-    int GetChannels() const;
+    int GetSampleRate() const override;
+    int GetChannels() const override;
 };

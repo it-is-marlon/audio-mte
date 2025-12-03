@@ -6,17 +6,18 @@
             "label": "Construir Audio MTE",
             "command": "cl.exe",
             "args": [
-                "/Zi", // Generar información de depuración
-                "/EHsc", // Manejo de excepciones estándar
-                "/nologo", // Ocultar banner de copyright
-                "/Fe:", // Flag para nombrar el ejecutable
-                "${fileDirname}\\main.exe", // Salida: main.exe en la misma carpeta
-                "${file}", // Entrada: main.cpp
-                "Ole32.lib", // <--- CRITICO: Enlace a COM (CoInitialize)
-                "User32.lib" // Enlace a funciones básicas de ventana
+                "/Zi",
+                "/EHsc",
+                "/nologo",
+                "/Fe:${workspaceFolder}\\bin\\main.exe",
+                "${workspaceFolder}\\src\\main.cpp",
+                "${workspaceFolder}\\src\\modules\\audio_listener\\WasapiListener.cpp",
+                "${workspaceFolder}\\src\\modules\\audio_analyzer\\AudioAnalyzer.cpp",
+                "Ole32.lib",
+                "User32.lib"
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [
                 "$msCompile"
