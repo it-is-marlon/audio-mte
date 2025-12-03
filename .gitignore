@@ -1,0 +1,46 @@
+# --- Windows & Sistema Operativo ---
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+
+# --- Visual Studio Code ---
+.vscode/*
+# ! Excepción: Mantenemos la configuración de compilación crítica para el proyecto
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/c_cpp_properties.json
+# Ignoramos configuraciones personales de usuario y historial local
+.vscode/settings.json
+.history/
+
+# --- Artefactos de Compilación MSVC (C++) ---
+# Objetos intermedios (Código compilado no enlazado)
+*.obj
+
+# Archivos de depuración (Símbolos)
+*.pdb
+*.idb
+*.ilk
+
+# Archivos de encabezado precompilados (Aceleran build, pesan mucho)
+*.pch
+*.ipch
+
+# Logs y temporales de build
+*.tlog
+*.log
+*.lastbuildstate
+
+# --- Binarios Finales ---
+*.exe
+*.dll
+*.lib
+*.exp
+
+# --- Directorios de Salida ---
+# Ignorar todo el contenido de bin/ excepto el archivo .gitkeep
+# Esto asegura que la carpeta 'bin' se suba al repo (para que cl.exe no falle),
+# pero sin los ejecutables dentro.
+bin/*
+!bin/.gitkeep
